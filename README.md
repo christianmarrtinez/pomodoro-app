@@ -15,7 +15,7 @@ Feel free to customize the aesthetic design of the app, but functionality should
 - **Interval Switching:** The timer should toggle between 25 minutes (work session) and 5 minutes (break session).
 
 - create menu page with create session button
-- create follow up page that has
+- create CreateSession page that has
   -- 3 buttons for study timer (20 min , 25 min, 30 min) + set custom session timer 
   -- 3 buttons for break (5 min, 10 min, 15 min) + set custom break timer 
   -- "start session" button that only works when study and break times are assigned and brings you to the timer page wth start/stop and reset buttons

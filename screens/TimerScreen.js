@@ -6,8 +6,10 @@ import { vibrate } from '../utils';
 export default class TimerScreen extends React.Component {
   constructor(props) {
     super(props);
+    const { studyTime, breakTime } = props.route.params;
     this.state = {
-      time: 1500, // Initial work time: 25 minutes in seconds
+      time: studyTime || 1500, // Default to 25 minutes if no time passed
+      breakTime: breakTime || 300, // Default to 5 minutes if no break time passed
       timerRunning: false,
       timerLabel: 'Work Time',
     };

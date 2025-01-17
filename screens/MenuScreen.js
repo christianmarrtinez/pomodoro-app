@@ -5,8 +5,8 @@ const MenuScreen = ({ navigation }) => (
   <View style={styles.menuContainer}>
     <Image source={require('../assets/icon.png')} style={styles.icon} />
     <Button
-      title="Start Session"
-      onPress={() => navigation.navigate('Timer')}
+      title="Create Session"
+      onPress={() => navigation.navigate('CreateSession')}
     />
   </View>
 );
