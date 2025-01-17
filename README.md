@@ -5,6 +5,7 @@ The **Pomodoro Timer** app will help users manage their work and break cycles us
 - A timer that switches between work and break intervals
 - Vibration alerts to notify users when it's time to take a break or resume work
 
+
 Feel free to customize the aesthetic design of the app, but functionality should remain intact.
 
 ## Core Features
@@ -12,6 +13,13 @@ Feel free to customize the aesthetic design of the app, but functionality should
 - **Timer Controls:** Users can start, stop, and reset the timer.
 - **Vibration Alerts:** The phone should vibrate at the end of each interval.
 - **Interval Switching:** The timer should toggle between 25 minutes (work session) and 5 minutes (break session).
+
+- create menu page with create session button
+- create follow up page that has
+  -- 3 buttons for study timer (20 min , 25 min, 30 min) + set custom session timer 
+  -- 3 buttons for break (5 min, 10 min, 15 min) + set custom break timer 
+  -- "start session" button that only works when study and break times are assigned and brings you to the timer page wth start/stop and reset buttons
+
 
 ### Optional Challenge
 - Allow users to customize the timer's work and break durations (e.g., 10-minute work sessions and 5-minute breaks).
