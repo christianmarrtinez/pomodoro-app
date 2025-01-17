@@ -55,6 +55,7 @@ const CreateSession = ({ navigation }) => {
         keyboardType="numeric"
         onChangeText={setCustomStudyTime}
         value={customStudyTime}
+        placeholderTextColor="#8b51ff" // Purple placeholder text
       />
       <Text style={styles.header}>Select Break Time</Text>
       <View style={styles.buttonRow}>
@@ -68,6 +69,7 @@ const CreateSession = ({ navigation }) => {
         keyboardType="numeric"
         onChangeText={setCustomBreakTime}
         value={customBreakTime}
+        placeholderTextColor="#8b51ff" // Purple placeholder text
       />
       <Button title="Set Custom Times" onPress={selectCustomTime} />
       <Button title="Start Session" onPress={handleStartSession} />
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     borderWidth: 2,
-    borderColor: '#6a1b9a', // Purple border
+    borderColor: "#8b51ff", // Purple border
     borderRadius: 50,
     width: 80,
     height: 80,
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
   },
   selectedText: {
     fontSize: 14,
-    color: '#6a1b9a', // Purple text
+    color: "#8b51ff", // Purple text
   },
   input: {
     borderWidth: 1,
@@ -131,7 +133,9 @@ const styles = StyleSheet.create({
     width: '80%',
     borderRadius: 5,
     textAlign: 'center',
+    color: "#8b51ff", // Purple text color inside input
   },
 });
 
 export default CreateSession;
+
