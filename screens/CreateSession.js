@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, TextInput, Text } from 'react-native';
+import { View, Button, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
 
 const CreateSession = ({ navigation }) => {
   const [studyTime, setStudyTime] = useState(null);
@@ -20,13 +20,34 @@ const CreateSession = ({ navigation }) => {
     if (customBreakTime) setBreakTime(parseInt(customBreakTime, 10) * 60);
   };
 
+  const renderButton = (title, time, setTime, isStudyTime) => {
+    const isSelected = isStudyTime ? time === studyTime : time === breakTime;
+    const buttonStyle = isSelected ? styles.selectedButton : styles.button;
+    const textStyle = isSelected ? styles.selectedText : styles.text;
+
+    return (
+      <TouchableOpacity
+        style={buttonStyle}
+        onPress={() => {
+          if (isStudyTime) {
+            setStudyTime(time);
+          } else {
+            setBreakTime(time);
+          }
+        }}
+      >
+        <Text style={textStyle}>{title}</Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Select Study Time</Text>
       <View style={styles.buttonRow}>
-        <Button title="20 min" onPress={() => setStudyTime(20 * 60)} />
-        <Button title="25 min" onPress={() => setStudyTime(25 * 60)} />
-        <Button title="30 min" onPress={() => setStudyTime(30 * 60)} />
+        {renderButton("20 min", 20 * 60, setStudyTime, true)}
+        {renderButton("25 min", 25 * 60, setStudyTime, true)}
+        {renderButton("30 min", 30 * 60, setStudyTime, true)}
       </View>
       <TextInput
         style={styles.input}
@@ -37,9 +58,9 @@ const CreateSession = ({ navigation }) => {
       />
       <Text style={styles.header}>Select Break Time</Text>
       <View style={styles.buttonRow}>
-        <Button title="5 min" onPress={() => setBreakTime(5 * 60)} />
-        <Button title="10 min" onPress={() => setBreakTime(10 * 60)} />
-        <Button title="15 min" onPress={() => setBreakTime(15 * 60)} />
+        {renderButton("5 min", 5 * 60, setBreakTime, false)}
+        {renderButton("10 min", 10 * 60, setBreakTime, false)}
+        {renderButton("15 min", 15 * 60, setBreakTime, false)}
       </View>
       <TextInput
         style={styles.input}
@@ -71,6 +92,36 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginVertical: 10,
     width: '100%',
+  },
+  button: {
+    padding: 10,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 50,
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  selectedButton: {
+    padding: 10,
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#6a1b9a', // Purple border
+    borderRadius: 50,
+    width: 80,
+    height: 80,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  text: {
+    fontSize: 14,
+    color: '#000', // Default text color
+  },
+  selectedText: {
+    fontSize: 14,
+    color: '#6a1b9a', // Purple text
   },
   input: {
     borderWidth: 1,
