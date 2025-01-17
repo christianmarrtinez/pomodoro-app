@@ -55,7 +55,7 @@ const CreateSession = ({ navigation }) => {
         keyboardType="numeric"
         onChangeText={setCustomStudyTime}
         value={customStudyTime}
-        placeholderTextColor="#8b51ff" // Purple placeholder text
+        placeholderTextColor="#fff" // White placeholder text
       />
       <Text style={styles.header}>Select Break Time</Text>
       <View style={styles.buttonRow}>
@@ -69,10 +69,12 @@ const CreateSession = ({ navigation }) => {
         keyboardType="numeric"
         onChangeText={setCustomBreakTime}
         value={customBreakTime}
-        placeholderTextColor="#8b51ff" // Purple placeholder text
+        placeholderTextColor="#fff" // White placeholder text
       />
-      <Button title="Set Custom Times" onPress={selectCustomTime} />
-      <Button title="Start Session" onPress={handleStartSession} />
+      <View style={styles.buttonContainer}>
+        <Button title="Set Custom Times" onPress={selectCustomTime} color="#fff" />
+        <Button title="Start Session" onPress={handleStartSession} color="#fff" />
+      </View>
     </View>
   );
 };
@@ -83,11 +85,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: '#8b51ff', // Purple background
   },
   header: {
     fontSize: 18,
     marginVertical: 10,
+    color: '#fff', // White text
   },
   buttonRow: {
     flexDirection: 'row',
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#fff',
     borderWidth: 2,
-    borderColor: "#8b51ff", // Purple border
+    borderColor: "#fff", // White border for selected
     borderRadius: 50,
     width: 80,
     height: 80,
@@ -119,23 +122,28 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    color: '#000', // Default text color
+    color: '#fff', // White text for default
   },
   selectedText: {
     fontSize: 14,
-    color: "#8b51ff", // Purple text
+    color: "#8b51ff", // Purple text for selected
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#fff',
     padding: 10,
     marginVertical: 10,
     width: '80%',
     borderRadius: 5,
     textAlign: 'center',
-    color: "#8b51ff", // Purple text color inside input
+    color: "#fff", // White text inside input
+  },
+  buttonContainer: {
+    marginTop: 20,
+    width: '80%',
+    justifyContent: 'space-between',
+    height: 100,
   },
 });
 
 export default CreateSession;
-
