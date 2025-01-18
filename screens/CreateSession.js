@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Button, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TextInput, Text, TouchableOpacity } from 'react-native';
 
 const CreateSession = ({ navigation }) => {
   const [studyTime, setStudyTime] = useState(null);
@@ -22,8 +22,8 @@ const CreateSession = ({ navigation }) => {
 
   const renderButton = (title, time, setTime, isStudyTime) => {
     const isSelected = isStudyTime ? time === studyTime : time === breakTime;
-    const buttonStyle = isSelected ? styles.selectedButton : styles.button;
-    const textStyle = isSelected ? styles.selectedText : styles.text;
+    const buttonStyle = isSelected ? styles.selectedButton : styles.defaultButton;
+    const textStyle = isSelected ? styles.selectedText : styles.defaultText;
 
     return (
       <TouchableOpacity
@@ -55,7 +55,7 @@ const CreateSession = ({ navigation }) => {
         keyboardType="numeric"
         onChangeText={setCustomStudyTime}
         value={customStudyTime}
-        placeholderTextColor="#fff" // White placeholder text
+        placeholderTextColor="#fff"
       />
       <Text style={styles.header}>Select Break Time</Text>
       <View style={styles.buttonRow}>
@@ -69,11 +69,15 @@ const CreateSession = ({ navigation }) => {
         keyboardType="numeric"
         onChangeText={setCustomBreakTime}
         value={customBreakTime}
-        placeholderTextColor="#fff" // White placeholder text
+        placeholderTextColor="#fff"
       />
       <View style={styles.buttonContainer}>
-        <Button title="Set Custom Times" onPress={selectCustomTime} color="#fff" />
-        <Button title="Start Session" onPress={handleStartSession} color="#fff" />
+        <TouchableOpacity style={styles.actionButton} onPress={selectCustomTime}>
+          <Text style={styles.actionButtonText}>Set Custom Times</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionButton} onPress={handleStartSession}>
+          <Text style={styles.actionButtonText}>Start Session</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -85,12 +89,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#8b51ff', // Purple background
+    backgroundColor: '#8b51ff',
   },
   header: {
     fontSize: 18,
     marginVertical: 10,
-    color: '#fff', // White text
+    color: '#fff',
   },
   buttonRow: {
     flexDirection: 'row',
@@ -98,35 +102,37 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     width: '100%',
   },
-  button: {
+  defaultButton: {
     padding: 10,
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#8b51ff',
     borderRadius: 50,
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
     justifyContent: 'center',
     alignItems: 'center',
   },
   selectedButton: {
     padding: 10,
     backgroundColor: '#fff',
-    borderWidth: 2,
-    borderColor: "#fff", // White border for selected
+    borderWidth: 3,
+    borderColor: '#000',
     borderRadius: 50,
-    width: 80,
-    height: 80,
+    width: 90,
+    height: 90,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
+  defaultText: {
     fontSize: 14,
-    color: '#fff', // White text for default
+    fontWeight: '300',
+    color: '#8b51ff',
   },
   selectedText: {
     fontSize: 14,
-    color: "#8b51ff", // Purple text for selected
+    fontWeight: '700',
+    color: '#8b51ff',
   },
   input: {
     borderWidth: 1,
@@ -136,13 +142,26 @@ const styles = StyleSheet.create({
     width: '80%',
     borderRadius: 5,
     textAlign: 'center',
-    color: "#fff", // White text inside input
+    color: '#fff',
   },
   buttonContainer: {
     marginTop: 20,
     width: '80%',
     justifyContent: 'space-between',
     height: 100,
+  },
+  actionButton: {
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 10,
+  },
+  actionButtonText: {
+    fontSize: 16,
+    color: '#8b51ff',
+    textAlign: 'center',
+    fontWeight: '700',
   },
 });
 
