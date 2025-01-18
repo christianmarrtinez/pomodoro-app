@@ -1,21 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { vibrate } from '../utils';
 
 export default class TimerScreen extends React.Component {
   constructor(props) {
     super(props);
 
-    // Retrieve the initial study time and break time from navigation params
     const { route } = props;
     const { studyTime, breakTime } = route.params;
 
     this.state = {
-      time: studyTime, // Initialize with the selected study time
+      time: studyTime,
       timerRunning: false,
       timerLabel: 'Work Time',
-      studyTime, // Store study time for resetting
-      breakTime, // Store break time for switching
+      studyTime,
+      breakTime,
     };
 
     this.timer = null;
@@ -35,7 +34,7 @@ export default class TimerScreen extends React.Component {
     const { time } = this.state;
     if (time === 0) {
       this.toggleTimer();
-      vibrate(); // Trigger vibration when the timer hits 0
+      vibrate();
       this.switchTimer();
     } else {
       this.setState({ time: time - 1 });
@@ -45,9 +44,9 @@ export default class TimerScreen extends React.Component {
   switchTimer = () => {
     const { timerLabel, studyTime, breakTime } = this.state;
     if (timerLabel === 'Work Time') {
-      this.setState({ time: breakTime, timerLabel: 'Break Time' }); // Switch to break time
+      this.setState({ time: breakTime, timerLabel: 'Break Time' });
     } else {
-      this.setState({ time: studyTime, timerLabel: 'Work Time' }); // Switch back to study time
+      this.setState({ time: studyTime, timerLabel: 'Work Time' });
     }
   };
 
@@ -59,7 +58,6 @@ export default class TimerScreen extends React.Component {
 
   resetTimer = () => {
     const { timerLabel, studyTime, breakTime } = this.state;
-    // Reset to the initial study or break time based on the current label
     const resetTime = timerLabel === 'Work Time' ? studyTime : breakTime;
     this.setState({ time: resetTime, timerRunning: false });
     clearInterval(this.timer);
@@ -71,11 +69,19 @@ export default class TimerScreen extends React.Component {
       <View style={styles.container}>
         <Text style={styles.label}>{timerLabel}</Text>
         <Text style={styles.timer}>{this.formatTime(time)}</Text>
-        <Button
-          title={timerRunning ? 'Stop' : 'Start'}
-          onPress={this.toggleTimer}
-        />
-        <Button title="Reset" onPress={this.resetTimer} />
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            style={styles.customButton}
+            onPress={this.toggleTimer}
+          >
+            <Text style={styles.customButtonText}>
+              {timerRunning ? 'Stop' : 'Start'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.customButton} onPress={this.resetTimer}>
+            <Text style={styles.customButtonText}>Reset</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -84,18 +90,37 @@ export default class TimerScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#8b51ff', // Purple background
+    backgroundColor: '#8b51ff',
     alignItems: 'center',
     justifyContent: 'center',
   },
   label: {
     fontSize: 24,
     marginBottom: 20,
-    color: '#fff', // White text
+    color: '#fff',
   },
   timer: {
     fontSize: 48,
     fontWeight: 'bold',
-    color: '#fff', // White text
+    color: '#fff',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 20,
+    width: '60%',
+  },
+  customButton: {
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 10,
+  },
+  customButtonText: {
+    color: '#8b51ff',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
